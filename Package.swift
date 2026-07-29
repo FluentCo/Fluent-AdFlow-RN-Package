@@ -28,8 +28,8 @@
 import PackageDescription
 
 // ── Update both values on every release ──────────────────────
-let version  = "4.0.0-beta.2"
-let checksum = "REPLACE_WITH_SHA256_FROM_build-xcframework.sh"
+let version  = "4.1.1-beta.1"
+let checksum = "7addeee1c1a9028d4a33b5c60f1af4922060026ae794d2aaa27904d4dc5e0574"
 // ─────────────────────────────────────────────────────────────
 
 let s3Base = "https://mobile-sdk.adflow-prod.minionplatform.com/ios-rn"
