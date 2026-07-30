@@ -39,16 +39,39 @@ let package = Package(
     name: "FluentAdFlowRNBridge",
     platforms: [.iOS(.v16)],
     products: [
+        // Consumers add this one product and get both the RN bridge
+        // XCFramework and FluentAdFlowAdsWidget resolved automatically.
         .library(
             name: "FluentAdFlowRNBridge",
             targets: ["FluentAdFlowRNBridge"]
         ),
     ],
+    dependencies: [
+        // Provides FluentAdFlowAdsWidget.xcframework (required by the bridge).
+        // Xcode resolves this transitively — consumers do NOT need to add it manually.
+        .package(
+            url: "https://github.com/FluentCo/Fluent-AdFlow-Widget-Package",
+            from: "4.1.0"
+        ),
+    ],
     targets: [
+        // Pre-built XCFramework (the React Native bridge).
+        // Named with "Binary" suffix so the wrapper target can use "FluentAdFlowRNBridge".
         .binaryTarget(
-            name: "FluentAdFlowRNBridge",
+            name: "FluentAdFlowBridge",
             url: "\(s3Base)/v\(version)/\(zipName)",
             checksum: checksum
+        ),
+
+        // Thin wrapper that pulls in both the binary and FluentAdFlowAdsWidget.
+        // SPM resolves both as transitive dependencies for any consumer.
+        .target(
+            name: "FluentAdFlowRNBridge",
+            dependencies: [
+                .target(name: "FluentAdFlowBridge"),
+                .product(name: "fluentAdFlowAdsWidget", package: "Fluent-AdFlow-Widget-Package"),
+            ],
+            path: "Sources/FluentAdFlowRNBridge"
         ),
     ]
 )
