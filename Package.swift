@@ -69,7 +69,7 @@ let package = Package(
             name: "FluentAdFlowRNBridge",
             dependencies: [
                 .target(name: "FluentAdFlowBridge"),
-                .product(name: "fluentAdFlowAdsWidget", package: "Fluent-AdFlow-Widget-Package"),
+                .product(name: "FluentAdFlowAdsWidget", package: "Fluent-AdFlow-Widget-Package"),
             ],
             path: "Sources/FluentAdFlowRNBridge"
         ),
