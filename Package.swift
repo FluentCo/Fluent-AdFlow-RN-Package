@@ -34,6 +34,7 @@ let checksum = "50938243a5140cbafe5ece1667359521110fe2966cfbda462906ec4ca762fa54
 // ─────────────────────────────────────────────────────────────
 
 let s3Base = "https://mobile-sdk.adflow-prod.minionplatform.com/ios-rn"
+let s3Dir    = "v\(version)-rn\(rnMinor)"  // matches S3 upload directory in release workflow
 let zipName  = "FluentAdFlowBridge.xcframework.\(version)-rn\(rnMinor).zip"
 
 let package = Package(
@@ -60,7 +61,7 @@ let package = Package(
         // Named with "Binary" suffix so the wrapper target can use "FluentAdFlowRNBridge".
         .binaryTarget(
             name: "FluentAdFlowBridge",
-            url: "\(s3Base)/v\(version)/\(zipName)",
+            url: "\(s3Base)/\(s3Dir)/\(zipName)",
             checksum: checksum
         ),
 
