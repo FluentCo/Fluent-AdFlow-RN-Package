@@ -29,8 +29,8 @@ import PackageDescription
 
 // ── Update both values on every release ──────────────────────
 let version  = "4.1.1-beta.1"
-let rnMinor  = "0.80"
-let checksum = "36fd07a82f5a214b7cbc4039c1046f1d8f8871e7606bb83714aad9880371b65d"
+let rnMinor  = "0.81"
+let checksum = "50938243a5140cbafe5ece1667359521110fe2966cfbda462906ec4ca762fa54"
 // ─────────────────────────────────────────────────────────────
 
 let s3Base = "https://mobile-sdk.adflow-prod.minionplatform.com/ios-rn"
