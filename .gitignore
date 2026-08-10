@@ -21,6 +21,9 @@ example-classic/node_modules/
 # XCFramework build output
 build/
 
+# SPM lock file — not needed for libraries; consumers generate their own
+Package.resolved
+
 # Xcode
 *.pbxuser
 !default.pbxuser
