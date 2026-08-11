@@ -34,7 +34,7 @@ let checksum = "a368d49891d7ae1cf060aa9f6e07f8563ee89611e18276b384369cb69fe4f7a3
 // ─────────────────────────────────────────────────────────────
 
 let s3Base = "https://mobile-sdk.adflow-prod.minionplatform.com/ios-rn"
-let s3Dir    = "v\(version).rn\(rnMinor)"  // matches GIT_TAG and S3 upload directory
+let s3Dir    = "\(version).rn\(rnMinor)"  // matches GIT_TAG and S3 upload directory
 let zipName  = "FluentAdFlowBridge.xcframework.\(version).rn\(rnMinor).zip"
 
 let package = Package(
