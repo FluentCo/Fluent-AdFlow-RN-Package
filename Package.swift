@@ -29,13 +29,13 @@ import PackageDescription
 
 // ── Update both values on every release ──────────────────────
 let version  = "4.1.1-beta.1"
-let rnMinor  = "80"  // short minor only; full form is 0.80
-let checksum = "f65f2ff34cdd93a4071e1050361a1ee9c5113689d093ee4d46f418ec44775736"
+let rnMinor  = "81"  // short minor only; full form is 0.81
+let checksum = "c274025ac1fd3f8d561b170c9f35155b33b56d43b400f15f0e6c23836eb678bc"
 // ─────────────────────────────────────────────────────────────
 
 let s3Base = "https://mobile-sdk.adflow-prod.minionplatform.com/ios-rn"
-let s3Dir    = "4.1.1-beta.1.rn80"  // matches GIT_TAG and S3 upload directory
-let zipName  = "FluentAdFlowBridge.xcframework.4.1.1-beta.1.rn80.zip"
+let s3Dir    = "4.1.1-beta.1.rn81"  // matches GIT_TAG and S3 upload directory
+let zipName  = "FluentAdFlowBridge.xcframework.4.1.1-beta.1.rn81.zip"
 
 let package = Package(
     name: "FluentAdFlowRNBridge",
