@@ -27,25 +27,31 @@
 
 import PackageDescription
 
-// ── Update both values on every release ──────────────────────
-let version  = "4.1.1-beta.1"
-let rnMinor  = "81"  // short minor only; full form is 0.81
-let checksum = "f42c120e6bc9371d21555170f7476cf63eec8da4d93fd938bf8ae6773eb104f1"
+// ── Update all values on every release ──────────────────────
+let version       = "4.1.1-beta.1"
+let rnMinor       = "81"  // short minor only; full form is 0.81
+let checksum      = "f42c120e6bc9371d21555170f7476cf63eec8da4d93fd938bf8ae6773eb104f1"
+let debugChecksum = "f42c120e6bc9371d21555170f7476cf63eec8da4d93fd938bf8ae6773eb104f1"
 // ─────────────────────────────────────────────────────────────
 
-let s3Base = "https://mobile-sdk.adflow-prod.minionplatform.com/ios-rn"
-let s3Dir    = "4.1.1-beta.1.rn81"  // matches GIT_TAG and S3 upload directory
-let zipName  = "FluentAdFlowBridge.xcframework.4.1.1-beta.1.rn81.zip"
+let s3Base    = "https://mobile-sdk.adflow-prod.minionplatform.com/ios-rn"
+let s3Dir     = "4.1.1-beta.1.rn81"  // matches GIT_TAG and S3 upload directory
+let zipName   = "FluentAdFlowBridge.xcframework.4.1.1-beta.1.rn81.zip"
+let debugZipName = "FluentAdFlowBridge.debug.xcframework.4.1.1-beta.1.rn81.zip"
 
 let package = Package(
     name: "FluentAdFlowRNBridge",
     platforms: [.iOS(.v16)],
     products: [
-        // Consumers add this one product and get both the RN bridge
-        // XCFramework and FluentAdFlowAdsWidget resolved automatically.
+        // Release xcframework — use for production / App Store builds.
         .library(
             name: "FluentAdFlowRNBridge",
             targets: ["FluentAdFlowRNBridge"]
+        ),
+        // Debug xcframework — use during development to avoid Debug/Release ShadowNode layout mismatch.
+        .library(
+            name: "FluentAdFlowRNBridgeDebug",
+            targets: ["FluentAdFlowRNBridgeDebug"]
         ),
     ],
     dependencies: [
@@ -57,16 +63,19 @@ let package = Package(
         ),
     ],
     targets: [
-        // Pre-built XCFramework (the React Native bridge).
-        // Named with "Binary" suffix so the wrapper target can use "FluentAdFlowRNBridge".
+        // Release xcframework — compiled with NDEBUG, matches Release host app ShadowNode layout.
         .binaryTarget(
             name: "FluentAdFlowBridge",
             url: "\(s3Base)/\(s3Dir)/\(zipName)",
             checksum: checksum
         ),
+        // Debug xcframework — compiled without NDEBUG, matches Debug host app ShadowNode layout.
+        .binaryTarget(
+            name: "FluentAdFlowBridgeDebug",
+            url: "\(s3Base)/\(s3Dir)/\(debugZipName)",
+            checksum: debugChecksum
+        ),
 
-        // Thin wrapper that pulls in both the binary and FluentAdFlowAdsWidget.
-        // SPM resolves both as transitive dependencies for any consumer.
         .target(
             name: "FluentAdFlowRNBridge",
             dependencies: [
@@ -74,6 +83,14 @@ let package = Package(
                 .product(name: "FluentAdFlowAdsWidget", package: "Fluent-AdFlow-Widget-Package"),
             ],
             path: "Sources/FluentAdFlowRNBridge"
+        ),
+        .target(
+            name: "FluentAdFlowRNBridgeDebug",
+            dependencies: [
+                .target(name: "FluentAdFlowBridgeDebug"),
+                .product(name: "FluentAdFlowAdsWidget", package: "Fluent-AdFlow-Widget-Package"),
+            ],
+            path: "Sources/FluentAdFlowRNBridgeDebug"
         ),
     ]
 )
