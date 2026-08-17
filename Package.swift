@@ -29,15 +29,15 @@ import PackageDescription
 
 // ── Update all values on every release ──────────────────────
 let version       = "4.1.1-beta.2"
-let rnMinor       = "81"  // short minor only; full form is 0.81
-let checksum      = "4f82ca62f4c02fc54c971a6c02dfff3d48cbaafe005ead4caf1cfbc18c4e1301"
-let debugChecksum = "4e016b9022696e0f46e8c985de5076f9afd685fef3fb387939b4226cee7f0ec3"
+let rnMinor       = "79"  // short minor only; full form is 0.79
+let checksum      = "ee822c30069c7411611e25c569b10f37d72146a8ae8a0dd8802abc387d8204f4"
+let debugChecksum = "0c54f2e1f4931a893889e05411795e60b37bed6f855a97255325c1c314642758"
 // ─────────────────────────────────────────────────────────────
 
 let s3Base    = "https://mobile-sdk.adflow-prod.minionplatform.com/ios-rn"
-let s3Dir     = "4.1.1-beta.2.rn81"  // matches GIT_TAG and S3 upload directory
-let zipName   = "FluentAdFlowBridge.xcframework.4.1.1-beta.2.rn81.zip"
-let debugZipName = "FluentAdFlowBridge.debug.xcframework.4.1.1-beta.2.rn81.zip"
+let s3Dir     = "4.1.1-beta.2.rn79"  // matches GIT_TAG and S3 upload directory
+let zipName   = "FluentAdFlowBridge.xcframework.4.1.1-beta.2.rn79.zip"
+let debugZipName = "FluentAdFlowBridge.debug.xcframework.4.1.1-beta.2.rn79.zip"
 
 let package = Package(
     name: "FluentAdFlowRNBridge",
